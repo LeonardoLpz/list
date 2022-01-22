@@ -47,10 +47,16 @@ export default {
     },
   },
   beforeCreate() {
-    getData.getData().then((response) => {
-      this.categoryData = response.data;
-      this.isLoading = false;
-    });
+    getData
+      .getData()
+      .then((response) => {
+        if (response.status == "bad") {
+          this.isError = true;
+        }
+        this.categoryData = response.data;
+        this.isLoading = false;
+      })
+      .catch(() => (this.isError = true));
   },
 };
 </script>
