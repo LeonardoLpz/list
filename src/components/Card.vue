@@ -1,14 +1,25 @@
 <template>
   <div class="card">
-    <img
-      src="https://resources.plerk.io/category/music.png"
-      alt="category Image"
-      class="card-image"
-    />
+    <img :src="this.props.image" alt="category Image" class="card-image" />
     <div class="card-content">
-      <p class="card-category">Música</p>
-      <p class="card-price">$10 USD</p>
-      <p class="card-category-type">Tipo de categoria: Normal</p>
+      <p class="card-category">{{ this.props.name.esp }}</p>
+      <p class="card-price">
+        {{
+          (this.props.suggested_budget / 100).toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+          })
+        }}
+      </p>
+      <p class="card-category-type">
+        {{
+          this.props.category_type == 1
+            ? "Normal"
+            : this.props.category_type == 2
+            ? "Libre"
+            : "Personalizada"
+        }}
+      </p>
     </div>
   </div>
 </template>
@@ -16,7 +27,7 @@
 export default {
   name: "Card",
   props: {
-    msg: String,
+    props: Object,
   },
 };
 </script>
@@ -48,9 +59,10 @@ $purple: #6a35ff;
   display: grid;
   grid-row-gap: 15px;
   grid-template-rows: auto auto 1fr;
+  width: 150px;
 }
 .card-category {
-  font-size: 24px;
+  font-size: 20px;
   font-family: Montserrat;
   font-weight: 600;
 }

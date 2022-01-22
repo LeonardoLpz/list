@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="search-bar">
+    <div class="search-bar" v-if="!isLoading">
       <img src="@/assets/search-icon.png" class="search-bar-image" />
       <input
         type="text"
@@ -10,25 +10,46 @@
         class="search-bar-input"
       />
     </div>
-
-    <div class="card-container">
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
+    <error-screen v-if="isError"></error-screen>
+    <div class="card-container" v-if="!isError && !isLoading">
+      <Card
+        v-for="(category, index) in filteredCategories"
+        :key="index"
+        :props="category"
+      ></Card>
     </div>
+    <loader v-if="isLoading"/>
   </div>
 </template>
 <script>
 import Card from "@/components/Card.vue";
+import ErrorScreen from "@/components/ErrorScreen.vue";
+import getData from "@/services/getData.js";
+import Loader from '@/components/Loader.vue';
 export default {
-  components: { Card },
-  methods: {
-    
-  }
+  components: { Card, ErrorScreen,Loader },
+  data() {
+    return {
+      isError: false,
+      categoryData:'',
+      searchParam:'',
+      isLoading:true
+    };
+  },
+  computed: {
+    filteredCategories(){
+      if(!this.searchParam){
+        return this.categoryData
+      }
+      return this.categoryData.filter(item => item.name.esp.toLowerCase().includes(this.searchParam.toLowerCase()))
+    }
+  },
+  beforeCreate() {
+    getData.getData().then((response) => {
+      this.categoryData = response.data;
+      this.isLoading = false 
+    });
+  },
 };
 </script>
 <style lang="scss">
