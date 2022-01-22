@@ -1,4 +1,5 @@
 # plerk-test
+This is a test for plerk, this is build in vue.js, and hosting in google firebase.
 
 ## Project setup
 ```
@@ -19,6 +20,9 @@ npm run build
 ```
 npm run lint
 ```
-
+### Deploy
+```
+firebase deploy
+```
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
