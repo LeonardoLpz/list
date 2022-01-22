@@ -18,36 +18,38 @@
         :props="category"
       ></Card>
     </div>
-    <loader v-if="isLoading"/>
+    <loader v-if="isLoading" />
   </div>
 </template>
 <script>
 import Card from "@/components/Card.vue";
 import ErrorScreen from "@/components/ErrorScreen.vue";
 import getData from "@/services/getData.js";
-import Loader from '@/components/Loader.vue';
+import Loader from "@/components/Loader.vue";
 export default {
-  components: { Card, ErrorScreen,Loader },
+  components: { Card, ErrorScreen, Loader },
   data() {
     return {
       isError: false,
-      categoryData:'',
-      searchParam:'',
-      isLoading:true
+      categoryData: "",
+      searchParam: "",
+      isLoading: true,
     };
   },
   computed: {
-    filteredCategories(){
-      if(!this.searchParam){
-        return this.categoryData
+    filteredCategories() {
+      if (!this.searchParam) {
+        return this.categoryData;
       }
-      return this.categoryData.filter(item => item.name.esp.toLowerCase().includes(this.searchParam.toLowerCase()))
-    }
+      return this.categoryData.filter((item) =>
+        item.name.esp.toLowerCase().includes(this.searchParam.toLowerCase())
+      );
+    },
   },
   beforeCreate() {
     getData.getData().then((response) => {
       this.categoryData = response.data;
-      this.isLoading = false 
+      this.isLoading = false;
     });
   },
 };

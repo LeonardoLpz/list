@@ -15,7 +15,7 @@ $black: #2d3958;
 $background: #fafbff;
 $white: #ffff;
 $purple: #6a35ff;
-.loading-section {  
+.loading-section {
   text-align: center;
   justify-content: center;
   display: grid;
