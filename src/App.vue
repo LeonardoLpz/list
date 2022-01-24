@@ -10,8 +10,8 @@
         class="search-bar-input"
       />
     </div>
-    <error-screen v-if="isError"></error-screen>
-    <div class="card-container" v-if="!isError && !isLoading">
+    <error-screen v-if="isError || !filteredCategories.length"></error-screen>
+    <div class="card-container" v-if="!isError && !isLoading && filteredCategories.length">
       <Card
         v-for="(category, index) in filteredCategories"
         :key="index"
@@ -33,7 +33,7 @@ export default {
       isError: false,
       categoryData: "",
       searchParam: "",
-      isLoading: true,
+      isLoading: true
     };
   },
   computed: {
@@ -42,8 +42,8 @@ export default {
         return this.categoryData;
       }
       return this.categoryData.filter((item) =>
-        item.name.esp.toLowerCase().includes(this.searchParam.toLowerCase())
-      );
+      item.name.esp.toLowerCase()
+      .includes(this.searchParam.toLowerCase()));
     },
   },
   beforeCreate() {
