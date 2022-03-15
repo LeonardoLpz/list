@@ -1,5 +1,5 @@
 # plerk-test
-This is a test for plerk, this is build in vue.js, and hosting in google firebase.
+This is a list rendered using v-for in vue.js, and hosting in google firebase.
 
 ## Project setup
 ```
