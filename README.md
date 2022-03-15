@@ -1,4 +1,4 @@
-# plerk-test
+# Rendering List
 This is a list rendered using v-for in vue.js, and hosting in google firebase.
 
 ## Project setup
